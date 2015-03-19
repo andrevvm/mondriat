@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="{block:English}en{/block:English}{block:French}fr{/block:French}{block:German}de{/block:German}{block:Japanese}ja{/block:Japanese}{block:Italian}it{/block:Italian}{block:Spanish}es{/block:Spanish}{block:Polish}pl{/block:Polish}">
+
+  <!--
+
+  Ratio Tumblr Theme
+  http://ratio.andrevv.com/
+
+  Copyright (c) Andrew McCarthy.
+  Please do not re-use code without permission.
+  http://andrevv.com/
+
+  Thanks for choosing this theme <3 You can alter any of the code
+  as you please, but just note it will exclude you from any future
+  updates or bug fixes.
+
+  Version 1.0.00
+
+  -->
+
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="utf-8">
+        
+    <title>{Title}{block:PostSummary} | {PostSummary}{/block:PostSummary}</title>
+    <meta name="description" content="{MetaDescription}">
+
+    <link rel="apple-touch-icon" href="{PortraitURL-128}">
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+    <%= stylesheet_inline_tag "normalize", "all" %>
+
+    <%= javascript_inline_tag  "all" %>
+
+    <style type="text/css">
+      {CustomCSS}
+    </style>
+
+    {block:IfGoogleAnalyticsID}<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '{text:Google Analytics ID}']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>{/block:IfGoogleAnalyticsID}
+
+  </head>
+  
+  <body class="<%= page_classes %>">
+    <%= yield %>
+
+    <div class="Loading"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+
+    <footer>
+      {block:Pagination}
+        <nav class="pages-nav">
+            {block:PreviousPage}
+            <a href="{PreviousPage}" class="back">
+                <span class="fa fa-long-arrow-left"></span>
+            </a>{/block:PreviousPage}{block:NextPage}<a href="{NextPage}" class="forward">
+                <span class="fa fa-long-arrow-right"></span>
+            </a>{/block:NextPage}
+            <div class="clear"></div>
+        </nav>
+        {/block:Pagination}
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/JavaScript"></script>
+    
+    <script src="http://static.tumblr.com/54tapni/EDTnl3s3c/jquery.autopager-1.0.0.js" type="text/JavaScript"></script>
+    <script type="text/javascript">
+      $.autopager({
+          link   : 'nav.pages-nav .forward',
+          content: '.Item',
+
+          // enable/disable scroll loading
+          autoLoad: true,
+
+          // initial page number 
+          page: {CurrentPage},
+          
+          // where contents would be appended.
+          // use "appendTo" or "insertBefore"
+          appendTo: '#container', 
+          // insertBefore: '#footer', 
+
+          // a callback function to be triggered when loading start 
+          start: function(current, next) {
+            $('body').addClass('is-loading');
+          },
+
+          // a function to be executed when next page was loaded. 
+          // "this" points to the element of loaded content.
+          load: function(current, next) {
+            $('body').removeClass('is-loading');
+          }
+      });
+    </script>
+
+  </body>
+</html>
